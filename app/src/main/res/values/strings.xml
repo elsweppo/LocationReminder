@@ -1,0 +1,8 @@
+<resources>
+    <string name="app_name">" LocationReminder"</string>
+    <string name="title_activity_maps">Map</string>
+    <string name="title_activity_tasks">Tasks</string>
+    <string name="title_activity_your_tasks">Your Tasks</string>
+    <string name="title_activity_task_details">Task Details</string>
+    <string name="activity_task_details_store">Store</string>
+</resources>
