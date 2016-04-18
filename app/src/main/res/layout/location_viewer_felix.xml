@@ -14,13 +14,13 @@
         android:layout_height="wrap_content"
         android:text="Locations for task XY!"
         android:textSize="20sp"
-        android:id="@+id/location_screenTitle" />
+        android:id="@+id/locations_screenTitle" />
 
     <LinearLayout
         android:orientation="vertical"
         android:layout_width="match_parent"
         android:layout_height="match_parent"
-        android:layout_below="@+id/location_screenTitle"
+        android:layout_below="@+id/locations_screenTitle"
         android:layout_alignParentLeft="true"
         android:layout_alignParentStart="true"
         android:layout_marginTop="30dp"

@@ -14,13 +14,13 @@
         android:layout_height="wrap_content"
         android:text="Tasks!"
         android:textSize="20sp"
-        android:id="@+id/tasks_screenTitle" />
+        android:id="@+id/task_screenTitle" />
 
     <LinearLayout
         android:orientation="vertical"
         android:layout_width="match_parent"
         android:layout_height="match_parent"
-        android:layout_below="@+id/tasks_screenTitle"
+        android:layout_below="@+id/task_screenTitle"
         android:layout_alignParentLeft="true"
         android:layout_alignParentStart="true"
         android:layout_marginTop="48dp"
