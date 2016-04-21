@@ -1,22 +1,9 @@
 <?xml version="1.0" encoding="utf-8"?>
-<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
-    xmlns:tools="http://schemas.android.com/tools"
-    android:layout_width="match_parent"
-    android:layout_height="match_parent"
-    android:paddingBottom="@dimen/activity_vertical_margin"
-    android:paddingLeft="@dimen/activity_horizontal_margin"
-    android:paddingRight="@dimen/activity_horizontal_margin"
-    android:paddingTop="@dimen/activity_vertical_margin"
-    tools:context="com.example.felix.taskreminderscreens.Dashboard">
 
-    <TextView
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:text="Tasks!"
-        android:textSize="20sp"
-        android:id="@+id/task_screenTitle" />
 
     <LinearLayout
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
         android:orientation="vertical"
         android:layout_width="match_parent"
         android:layout_height="match_parent"
@@ -32,8 +19,7 @@
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:gravity="center_horizontal"
-            android:padding="10dp"
-            android:background="@drawable/border">
+            android:padding="10dp">
 
 
             <CheckBox
@@ -59,7 +45,7 @@
                 android:layout_marginLeft="10dp"
                 android:layout_marginRight="30dp"
                 android:layout_marginTop="5dp"
-                android:textColor="@color/red"
+                android:textColor="@android:color/holo_red_dark"
                 android:text="1.7km"
                 android:id="@+id/tasks_distance" />
 
@@ -98,4 +84,3 @@
 
 
 
-</RelativeLayout>
