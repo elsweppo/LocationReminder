@@ -32,6 +32,9 @@
             android:name=".MapsActivity"
             android:label="@string/title_activity_maps">
         </activity>
+        <activity
+            android:name=".TaskDetailActivity">
+        </activity>
         <activity android:name=".TaskActivity"
             android:label="@string/title_activity_tasks">
             <intent-filter>

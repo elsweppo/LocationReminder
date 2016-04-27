@@ -1,5 +1,8 @@
 <?xml version="1.0" encoding="utf-8"?>
-<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+<ScrollView xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content">
+<LinearLayout
     android:layout_width="match_parent"
     android:orientation="vertical"
     android:layout_height="wrap_content">
@@ -16,12 +19,28 @@
 
     <EditText
         android:layout_width="match_parent"
-        android:layout_marginLeft="20dp"
         android:hint="Enter task here"
-        android:layout_marginRight="20dp"
+        android:layout_margin="20dp"
+        android:inputType="textCapSentences|textMultiLine"
+        android:maxLength="2000"
+        android:maxLines="4"
         android:layout_height="wrap_content"
         android:layout_marginTop="20dp"
         android:id="@+id/editText" />
+
+    <DatePicker
+        android:id="@+id/date_picker"
+        android:layout_width="match_parent"
+        android:calendarViewShown="true"
+        android:spinnersShown="false"
+        android:layout_weight="4"
+        android:layout_height="0dp" />
+
+    <TimePicker
+        android:id="@+id/time_picker"
+        android:layout_weight="4"
+        android:layout_width="match_parent"
+        android:layout_height="0dp" />
 
     <LinearLayout
         android:orientation="horizontal"
@@ -50,60 +69,6 @@
 
     </LinearLayout>
 
-    <LinearLayout
-        android:orientation="horizontal"
-        android:layout_width="match_parent"
-        android:weightSum="8"
-        android:layout_marginLeft="20dp"
-        android:layout_marginRight="20dp"
-        android:layout_marginTop="20dp"
-        android:layout_height="wrap_content">
-
-        <EditText
-            android:layout_width="0dp"
-            android:layout_height="wrap_content"
-            android:layout_weight="7"
-            android:hint="Date"
-            android:id="@+id/editText3" />
-
-        <ImageButton
-            android:layout_width="0dp"
-            android:layout_height="match_parent"
-            android:id="@+id/imageButton2"
-            android:layout_weight="1"
-            android:background="@null"
-            android:src="@android:drawable/ic_notification_overlay" />
-
-
-    </LinearLayout>
-
-    <LinearLayout
-        android:orientation="horizontal"
-        android:layout_width="match_parent"
-        android:weightSum="8"
-        android:layout_marginLeft="20dp"
-        android:layout_marginRight="20dp"
-        android:layout_marginTop="20dp"
-        android:layout_height="wrap_content">
-
-        <EditText
-            android:layout_width="0dp"
-            android:layout_height="wrap_content"
-            android:layout_weight="7"
-            android:hint="Remind Date"
-            android:id="@+id/editText4" />
-
-        <ImageButton
-            android:layout_width="0dp"
-            android:layout_height="match_parent"
-            android:id="@+id/imageButton3"
-            android:layout_weight="1"
-            android:background="@null"
-            android:src="@android:drawable/ic_notification_overlay" />
-
-
-    </LinearLayout>
-
     <SeekBar
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
@@ -112,17 +77,19 @@
         android:layout_marginRight="20dp"
         android:layout_marginEnd="20dp"
         android:layout_marginTop="20dp"
+        android:max="2500"
         android:layout_marginBottom="10dp"
         android:id="@+id/seekBar" />
 
     <TextView
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:text="x meters"
+        android:text="0 m"
         android:id="@+id/textView2"
         android:layout_gravity="center_horizontal" />
 
     <Button
+        android:id="@+id/storeBtn"
         android:layout_width="match_parent"
         android:layout_height="match_parent"
         android:text="@string/activity_task_details_store"
@@ -136,3 +103,4 @@
         android:layout_marginBottom="10dp"/>
 
 </LinearLayout>
+</ScrollView>
