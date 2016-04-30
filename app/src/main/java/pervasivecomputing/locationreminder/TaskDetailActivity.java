@@ -1,6 +1,7 @@
 package pervasivecomputing.locationreminder;
 
 import android.app.Activity;
+import android.app.DialogFragment;
 import android.content.Intent;
 import android.os.Bundle;
 import android.view.View;
@@ -11,38 +12,79 @@ import android.widget.TextView;
 import android.widget.TimePicker;
 import android.widget.Toast;
 
+import com.google.android.gms.location.places.Place;
+import com.google.android.gms.location.places.ui.PlacePicker;
+
+import org.w3c.dom.Text;
+
+import java.util.GregorianCalendar;
+
+import Models.Task;
+import io.realm.Realm;
+import io.realm.RealmConfiguration;
+
 /**
  * Created by Marko Jeftic on 15.04.16.
  */
 public class TaskDetailActivity extends Activity {
     private Button storeBtn;
+    private Button addLocationBtn;
+    private Button addDateBtn;
+    private Button addTimeBtn;
+
     private EditText taskDetailsEdit;
-    private EditText locationEdit;
-    private EditText dateEdit;
+    private TextView timeTv;
+    private TextView dateTv;
+    private TextView locationEdit;
+
     private SeekBar seekbar;
-    private TimePicker timepicker;
     private TextView result;
     private int progress=0;
-    private int timestamp=0;
-    private int longitude=50;
-    private int latitude=50;
+    private double longitude;
+    private double latitude;
+    public int year, month, day, hourOfDay, minute;
+
+    private String currentLocation;
+
+    int PLACE_PICKER_REQUEST = 1;
 
 
     @Override
-    protected void onCreate(Bundle savedInstanceState){
+    protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_task_detail);
         storeBtn = (Button) findViewById(R.id.storeBtn);
+        addLocationBtn = (Button) findViewById(R.id.addLocationBtn);
+        addDateBtn = (Button) findViewById(R.id.addDateBtn);
+        addTimeBtn = (Button) findViewById(R.id.addTimeBtn);
         result = (TextView) findViewById(R.id.textView2);
         taskDetailsEdit = (EditText) findViewById(R.id.editText);
-        locationEdit = (EditText) findViewById(R.id.editText2);
+        dateTv = (TextView) findViewById(R.id.dateTv);
+        timeTv = (TextView) findViewById(R.id.timeTv);
+        locationEdit = (TextView) findViewById(R.id.editText2);
         seekbar = (SeekBar) findViewById(R.id.seekBar);
-        timepicker = (TimePicker) findViewById(R.id.time_picker);
-        timepicker.setIs24HourView(true);
+//        timepicker = (TimePicker) findViewById(R.id.time_picker);
+//        timepicker.setIs24HourView(true);
 
+        addDateBtn.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                showDatePicker();
+            }
+        });
+        addTimeBtn.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                showTimePicker();
+            }
+        });
 
-
-
+        addLocationBtn.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                startPlacePicker();
+            }
+        });
 
         seekbar.setOnSeekBarChangeListener(new SeekBar.OnSeekBarChangeListener() {
             @Override
@@ -64,33 +106,92 @@ public class TaskDetailActivity extends Activity {
 
 
 
-        storeBtn.setOnClickListener(new View.OnClickListener(){
+        storeBtn.setOnClickListener(new View.OnClickListener() {
 
             @Override
             public void onClick(View v) {
-                if (taskDetailsEdit.getText().toString().matches("")) {
-                    Toast.makeText(TaskDetailActivity.this, "You did not enter a task", Toast.LENGTH_SHORT).show();
-                    return;
-                } else {
-                    DatabaseHelper dbHelper = new DatabaseHelper(TaskDetailActivity.this);
-                    String taskValue = taskDetailsEdit.getText().toString();
-                    int radiusValue = progress;
-                    int timestampValue =timestamp;
-                    int longitudeValue = longitude;
-                    int latitudeValue = latitude;
-                    dbHelper.createTask(0,taskValue,longitudeValue,latitudeValue,radiusValue,timestampValue);
-
-                    Intent intent = new Intent(TaskDetailActivity.this, TaskActivity.class);
-                    startActivity(intent);
-                }
-
-
-
-
+                storeTask();
             }
         });
-
     }
+
+    public void changeDate(int year, int month, int day){
+        this.year = year;
+        this.month = month;
+        this.day = day;
+        dateTv.setText(day+ "." + month + "." + year);
+    }
+
+
+    public void changeTime(int hourOfDay, int minute){
+        this.hourOfDay = hourOfDay;
+        this.minute = minute;
+        timeTv.setText(hourOfDay + ":" + minute);
+    }
+
+    public void showTimePicker(){
+        DialogFragment newFragment = new TimepickerFragment();
+        newFragment.show(this.getFragmentManager(), "timePicker");
+    }
+
+    public void showDatePicker(){
+        DialogFragment newFragment = new DatepickerFragment();
+        newFragment.show(this.getFragmentManager(), "datePicker");
+    }
+
+
+    public void storeTask(){
+        if (taskDetailsEdit.getText().toString().matches("")) {
+            Toast.makeText(TaskDetailActivity.this, "You did not enter a task", Toast.LENGTH_SHORT).show();
+            return;
+        } else {
+            //DatabaseHelper dbHelper = new DatabaseHelper(TaskDetailActivity.this);
+
+            GregorianCalendar calendar = new GregorianCalendar(year, month, day, hourOfDay, minute);
+            long timestamp = calendar.getTimeInMillis();
+            String taskValue = taskDetailsEdit.getText().toString();
+            int radiusValue = progress;
+            RealmConfiguration realmConfig = new RealmConfiguration.Builder(getApplicationContext()).build();
+// Get a Realm instance for this thread
+            Realm realm = Realm.getInstance(realmConfig);
+            realm.beginTransaction();
+            Task task = realm.createObject(Task.class);
+            task.setTaskDetail(taskValue);
+            task.setLatitude(latitude);
+            task.setLongitude(longitude);
+            task.setRadius(radiusValue);
+            task.setLocationName(currentLocation);
+            task.setTimestamp(timestamp);
+            realm.commitTransaction();
+//            dbHelper.createTask(taskValue, longitude, latitude, radiusValue, currentLocation, timestamp);
+
+            Intent intent = new Intent(TaskDetailActivity.this, TaskActivity.class);
+            startActivity(intent);
+        }
+    }
+
+    public void startPlacePicker(){
+        PlacePicker.IntentBuilder builder = new PlacePicker.IntentBuilder();
+        try{
+            startActivityForResult(builder.build(this), PLACE_PICKER_REQUEST);
+        }catch (Exception e){
+            e.printStackTrace();
+        }
+    }
+
+    protected void onActivityResult(int requestCode, int resultCode, Intent data) {
+        if (requestCode == PLACE_PICKER_REQUEST) {
+            if (resultCode == RESULT_OK) {
+                Place place = PlacePicker.getPlace(this, data);
+                longitude = place.getLatLng().longitude;
+                latitude = place.getLatLng().latitude;
+                currentLocation = place.getName().toString();
+                locationEdit.setText(currentLocation);
+            }
+        }
+    }
+
+
 
 
 

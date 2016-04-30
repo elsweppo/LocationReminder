@@ -34,8 +34,8 @@ public class DatabaseHelper extends SQLiteOpenHelper {
     @Override
     public void onCreate(SQLiteDatabase db) {
         db.execSQL(
-                "create table test_table " +
-                        "(id integer primary key, task text,longitude integer,latitude integer, radius integer, timestamp integer)"
+                "CREATE TABLE test_table " +
+                        "(id INTEGER PRIMARY KEY AUTOINCREMENT, task TEXT,longitude REAL,latitude REAL, locationname TEXT, radius INTEGER, timestamp INTEGER)"
         );
     }
 
@@ -46,13 +46,13 @@ public class DatabaseHelper extends SQLiteOpenHelper {
         onCreate(db);
     }
 
-    public boolean createTask(int id, String task, int longitude, int latitude, int radius, int timestamp){
+    public boolean createTask(String task, double longitude, double latitude, int radius, String locationName,long timestamp){
         SQLiteDatabase db = this.getWritableDatabase();
         ContentValues contentValues = new ContentValues();
-        contentValues.put("id",id);
         contentValues.put("task", task);
         contentValues.put("longitude", longitude);
         contentValues.put("latitude", latitude);
+        contentValues.put("locationname", locationName);
         contentValues.put("radius", radius);
         contentValues.put("timestamp", timestamp);
 

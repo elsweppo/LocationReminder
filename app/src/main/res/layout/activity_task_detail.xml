@@ -28,19 +28,6 @@
         android:layout_marginTop="20dp"
         android:id="@+id/editText" />
 
-    <DatePicker
-        android:id="@+id/date_picker"
-        android:layout_width="match_parent"
-        android:calendarViewShown="true"
-        android:spinnersShown="false"
-        android:layout_weight="4"
-        android:layout_height="0dp" />
-
-    <TimePicker
-        android:id="@+id/time_picker"
-        android:layout_weight="4"
-        android:layout_width="match_parent"
-        android:layout_height="0dp" />
 
     <LinearLayout
         android:orientation="horizontal"
@@ -51,17 +38,85 @@
         android:layout_marginTop="20dp"
         android:layout_height="wrap_content">
 
-        <EditText
-            android:layout_width="0dp"
+        <TextView
+            android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_weight="7"
-            android:hint="No Location"
+            android:paddingLeft="5dp"
+            android:lines="1"
+            android:ellipsize="end"
+            android:text="No Date selected"
+            android:id="@+id/dateTv" />
+
+        <Button
+            android:text="Add Date"
+            android:layout_width="120sp"
+            android:layout_height="wrap_content"
+            android:id="@+id/addDateBtn"
+            android:layout_weight="1"
+            android:background="@null"
+            android:src="@android:drawable/ic_notification_overlay" />
+
+
+    </LinearLayout>
+
+
+    <LinearLayout
+        android:orientation="horizontal"
+        android:layout_width="match_parent"
+        android:weightSum="8"
+        android:layout_marginLeft="20dp"
+        android:layout_marginRight="20dp"
+        android:layout_marginTop="20dp"
+        android:layout_height="wrap_content">
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_weight="7"
+            android:paddingLeft="5dp"
+            android:lines="1"
+            android:ellipsize="end"
+            android:text="No Time selected"
+            android:id="@+id/timeTv" />
+
+        <Button
+            android:text="Add Time"
+            android:layout_width="120sp"
+            android:layout_height="wrap_content"
+            android:id="@+id/addTimeBtn"
+            android:layout_weight="1"
+            android:background="@null"
+            android:src="@android:drawable/ic_notification_overlay" />
+
+
+    </LinearLayout>
+
+
+    <LinearLayout
+        android:orientation="horizontal"
+        android:layout_width="match_parent"
+        android:weightSum="8"
+        android:layout_marginLeft="20dp"
+        android:layout_marginRight="20dp"
+        android:layout_marginTop="20dp"
+        android:layout_height="wrap_content">
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_weight="7"
+            android:paddingLeft="5dp"
+            android:lines="1"
+            android:ellipsize="end"
+            android:text="No Location"
             android:id="@+id/editText2" />
 
-        <ImageButton
-            android:layout_width="0dp"
-            android:layout_height="match_parent"
-            android:id="@+id/imageButton"
+        <Button
+            android:text="Add Location"
+            android:layout_width="120sp"
+            android:layout_height="wrap_content"
+            android:id="@+id/addLocationBtn"
             android:layout_weight="1"
             android:background="@null"
             android:src="@android:drawable/ic_notification_overlay" />
