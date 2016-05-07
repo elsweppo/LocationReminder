@@ -1,24 +1,9 @@
 <?xml version="1.0" encoding="utf-8"?>
-
-
-    <LinearLayout
+<LinearLayout
     xmlns:android="http://schemas.android.com/apk/res/android"
-    xmlns:tools="http://schemas.android.com/tools"
-        android:orientation="vertical"
-        android:layout_width="match_parent"
-        android:layout_height="match_parent"
-        android:layout_below="@+id/task_screenTitle"
-        android:layout_alignParentLeft="true"
-        android:layout_alignParentStart="true"
-        android:layout_marginTop="48dp"
-        android:weightSum="1"
-        android:id="@+id/linearLayout">
-
-        <LinearLayout
-            android:orientation="horizontal"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:gravity="center_horizontal"
+            android:orientation="horizontal"
             android:padding="10dp">
 
 
@@ -26,16 +11,16 @@
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_marginTop="3dp"
-                android:id="@+id/tasks_checkbox"
-                />
+                android:layout_marginLeft="16dp"
+                android:layout_marginStart="16dp"
+                android:id="@+id/tasks_checkbox" />
 
             <TextView
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:textSize="20sp"
-                android:layout_marginLeft="40dp"
+                android:layout_marginLeft="16dp"
                 android:layout_marginTop="5dp"
-                android:gravity="center_vertical"
                 android:text="Evaluate App"
                 android:id="@+id/tasks_name" />
 
@@ -58,29 +43,13 @@
                 android:background="@drawable/ic_delete_black_24dp"/>
 
 
-        </LinearLayout>
-        <LinearLayout
-            android:orientation="horizontal"
-            android:layout_width="match_parent"
-            android:layout_height="match_parent"
-            android:gravity="center">
-
-            <ImageButton
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:layout_marginTop="5dp"
-                android:layout_marginLeft="20dp"
-                android:layout_marginRight="20dp"
-                android:id="@+id/tasks_add_button"
-                android:layout_gravity="bottom"
-                android:background="@drawable/ic_add_black_48dp"/>
-
-        </LinearLayout>
+</LinearLayout>
 
 
 
 
-    </LinearLayout>
+
+
 
 
 

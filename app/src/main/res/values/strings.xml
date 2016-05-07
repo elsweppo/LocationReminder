@@ -6,4 +6,7 @@
     <string name="title_activity_your_tasks">Your Tasks</string>
     <string name="title_activity_task_details">Task Details</string>
     <string name="activity_task_details_store">Store</string>
+    <string name="delete_task_msg">Do you really want to delete the Task?</string>
+    <string name="delete_task_positive">Delete</string>
+    <string name="delete_task_cancel">Cancel</string>
 </resources>

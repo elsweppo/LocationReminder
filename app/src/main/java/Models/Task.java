@@ -10,10 +10,17 @@ public class Task extends RealmObject{
     private long timestamp;
     private double latitude;
     private double longitude;
-
+    private boolean done;
     private int radius;
-
     private String locationName;
+
+    public boolean isDone() {
+        return done;
+    }
+
+    public void setDone(boolean done) {
+        this.done = done;
+    }
 
     public String getTaskDetail() {
         return taskDetail;

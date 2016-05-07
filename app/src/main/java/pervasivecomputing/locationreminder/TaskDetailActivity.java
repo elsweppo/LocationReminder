@@ -37,9 +37,9 @@ public class TaskDetailActivity extends Activity {
     private SeekBar seekbar;
     private TextView result;
     private int progress=0;
-    private double longitude;
-    private double latitude;
-    public int year, month, day, hourOfDay, minute;
+    private double longitude = 0.0;
+    private double latitude = 0.0;
+    public int year, month, day, hourOfDay , minute = 0;
 
     private String currentLocation;
 
@@ -140,9 +140,10 @@ public class TaskDetailActivity extends Activity {
             return;
         } else {
             //DatabaseHelper dbHelper = new DatabaseHelper(TaskDetailActivity.this);
-
-            GregorianCalendar calendar = new GregorianCalendar(year, month, day, hourOfDay, minute);
-            long timestamp = calendar.getTimeInMillis();
+            if ((day == 0) && (longitude == 0)){
+                Toast.makeText(TaskDetailActivity.this, "You must either provide a location or a date for the task", Toast.LENGTH_SHORT).show();
+                return;
+            }
             String taskValue = taskDetailsEdit.getText().toString();
             int radiusValue = progress;
             RealmConfiguration realmConfig = new RealmConfiguration.Builder(getApplicationContext()).build();
@@ -151,11 +152,20 @@ public class TaskDetailActivity extends Activity {
             realm.beginTransaction();
             Task task = realm.createObject(Task.class);
             task.setTaskDetail(taskValue);
-            task.setLatitude(latitude);
-            task.setLongitude(longitude);
             task.setRadius(radiusValue);
             task.setLocationName(currentLocation);
-            task.setTimestamp(timestamp);
+
+            if (day != 0 && month != 0 && year != 0){
+                GregorianCalendar calendar = new GregorianCalendar(year, month, day, hourOfDay, minute);
+                long timestamp = calendar.getTimeInMillis();
+                task.setTimestamp(timestamp);
+            }
+            if (longitude != 0 && latitude != 0){
+                task.setLatitude(latitude);
+                task.setLongitude(longitude);
+            }
+
+            task.setDone(false);
             realm.commitTransaction();
 //            dbHelper.createTask(taskValue, longitude, latitude, radiusValue, currentLocation, timestamp);
 
