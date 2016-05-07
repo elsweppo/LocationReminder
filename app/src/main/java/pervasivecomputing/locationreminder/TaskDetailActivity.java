@@ -9,13 +9,10 @@ import android.widget.Button;
 import android.widget.EditText;
 import android.widget.SeekBar;
 import android.widget.TextView;
-import android.widget.TimePicker;
 import android.widget.Toast;
 
 import com.google.android.gms.location.places.Place;
 import com.google.android.gms.location.places.ui.PlacePicker;
-
-import org.w3c.dom.Text;
 
 import java.util.GregorianCalendar;
 
@@ -63,9 +60,6 @@ public class TaskDetailActivity extends Activity {
         timeTv = (TextView) findViewById(R.id.timeTv);
         locationEdit = (TextView) findViewById(R.id.editText2);
         seekbar = (SeekBar) findViewById(R.id.seekBar);
-//        timepicker = (TimePicker) findViewById(R.id.time_picker);
-//        timepicker.setIs24HourView(true);
-
         addDateBtn.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
