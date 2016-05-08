@@ -1,7 +1,8 @@
 <?xml version="1.0" encoding="utf-8"?>
 <LinearLayout
     xmlns:android="http://schemas.android.com/apk/res/android"
-            android:layout_width="match_parent"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:orientation="horizontal"
             android:padding="10dp">
@@ -18,21 +19,40 @@
             <TextView
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:textSize="20sp"
+                android:textSize="24sp"
                 android:layout_marginLeft="16dp"
                 android:layout_marginTop="5dp"
-                android:text="Evaluate App"
+                tools:text="Evaluate App"
                 android:id="@+id/tasks_name" />
 
-            <TextView
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:layout_marginLeft="10dp"
-                android:layout_marginRight="30dp"
-                android:layout_marginTop="5dp"
-                android:textColor="@android:color/holo_red_dark"
-                android:text="1.7km"
-                android:id="@+id/tasks_distance" />
+
+    <FrameLayout
+        android:layout_width="wrap_content"
+        android:layout_height="match_parent">
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginLeft="10dp"
+            android:layout_marginRight="30dp"
+            android:layout_marginTop="5dp"
+            android:layout_gravity="top"
+            android:textSize="14sp"
+            android:textColor="@android:color/holo_red_dark"
+            tools:text="1.7km"
+            android:id="@+id/tasks_distance" />
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginLeft="10dp"
+            android:layout_marginRight="30dp"
+            android:layout_marginTop="5dp"
+            android:layout_gravity="bottom"
+            android:textColor="@android:color/holo_red_dark"
+            tools:text="1.7km"
+            android:textSize="14sp"
+            android:id="@+id/tasks_date" />
+    </FrameLayout>
+
 
             <ImageButton
                 android:layout_width="wrap_content"

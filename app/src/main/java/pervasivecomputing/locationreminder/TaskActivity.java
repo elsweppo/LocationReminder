@@ -104,7 +104,7 @@ public class TaskActivity extends Activity implements TaskAdapter.deleteListener
             }
             if (t.getTimestamp() != 0){
                 Log.d("julian", "time not null");
-                if ((System.currentTimeMillis() + 60000 > t.getTimestamp()) && (System.currentTimeMillis() - 60000 < t.getTimestamp())){
+                if ((System.currentTimeMillis() + 300000 > t.getTimestamp()) && (System.currentTimeMillis() - 300000 < t.getTimestamp())){
                     Log.d("julian", "vibrate");
                     Vibrator v = (Vibrator) this.getSystemService(Context.VIBRATOR_SERVICE);
                     v.vibrate(500);

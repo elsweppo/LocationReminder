@@ -11,7 +11,12 @@ import android.widget.CompoundButton;
 import android.widget.ImageButton;
 import android.widget.TextView;
 
+import org.w3c.dom.Text;
+
+import java.text.SimpleDateFormat;
 import java.util.ArrayList;
+import java.util.Calendar;
+import java.util.GregorianCalendar;
 
 import Models.Task;
 import io.realm.Realm;
@@ -53,6 +58,7 @@ public class TaskAdapter extends ArrayAdapter<Task> {
         View v = inflater.inflate(R.layout.cell_task, parent, false);
         TextView taskName = (TextView) v.findViewById(R.id.tasks_name);
         TextView taskDistance = (TextView) v.findViewById(R.id.tasks_distance);
+        TextView taskDate = (TextView) v.findViewById(R.id.tasks_date);
         CheckBox checkBox = (CheckBox) v.findViewById(R.id.tasks_checkbox);
 
         ImageButton deleteBtn = (ImageButton) v.findViewById(R.id.tasks_delete);
@@ -63,8 +69,18 @@ public class TaskAdapter extends ArrayAdapter<Task> {
             Location.distanceBetween(latitude, longitude, task.getLatitude(), task.getLongitude(), distResults);
             taskDistance.setVisibility(View.VISIBLE);
             taskDistance.setText(distResults[0] + "m");
-        }else{
+        }
+        else{
             taskDistance.setVisibility(View.GONE);
+        }
+        if (task.getTimestamp() != 0){
+            taskDate.setVisibility(View.VISIBLE);
+            Calendar calendar = GregorianCalendar.getInstance();
+            calendar.setTimeInMillis(task.getTimestamp());
+            SimpleDateFormat format = new SimpleDateFormat("dd.MM.yyyy 'at' HH:mm");
+            taskDate.setText(format.format(calendar.getTime()));
+        }else{
+            taskDate.setVisibility(View.GONE);
         }
 
         checkBox.setSelected(task.isDone());
