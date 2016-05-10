@@ -1,6 +1,11 @@
 package Models;
 
 
+import android.location.*;
+
+import java.util.List;
+
+import io.realm.RealmList;
 import io.realm.RealmObject;
 import io.realm.annotations.PrimaryKey;
 
@@ -8,11 +13,24 @@ public class Task extends RealmObject{
 
     @PrimaryKey String taskDetail;
     private long timestamp;
-    private double latitude;
-    private double longitude;
+    private RealmList<TaskLocation> locations;
+
     private boolean done;
     private int radius;
-    private String locationName;
+
+    public RealmList<TaskLocation> getLocations() {
+        return locations;
+    }
+
+    public void setLocations(RealmList<TaskLocation> locations) {
+        this.locations = locations;
+    }
+
+
+
+
+
+
 
     public boolean isDone() {
         return done;
@@ -21,6 +39,7 @@ public class Task extends RealmObject{
     public void setDone(boolean done) {
         this.done = done;
     }
+
 
     public String getTaskDetail() {
         return taskDetail;
@@ -38,36 +57,12 @@ public class Task extends RealmObject{
         this.timestamp = timestamp;
     }
 
-    public double getLatitude() {
-        return latitude;
-    }
-
-    public void setLatitude(double latitude) {
-        this.latitude = latitude;
-    }
-
-    public double getLongitude() {
-        return longitude;
-    }
-
-    public void setLongitude(double longitude) {
-        this.longitude = longitude;
-    }
-
     public int getRadius() {
         return radius;
     }
 
     public void setRadius(int radius) {
         this.radius = radius;
-    }
-
-    public String getLocationName() {
-        return locationName;
-    }
-
-    public void setLocationName(String locationName) {
-        this.locationName = locationName;
     }
 
 

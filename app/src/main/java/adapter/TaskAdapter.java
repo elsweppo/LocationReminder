@@ -17,8 +17,10 @@ import java.text.SimpleDateFormat;
 import java.util.ArrayList;
 import java.util.Calendar;
 import java.util.GregorianCalendar;
+import java.util.List;
 
 import Models.Task;
+import Models.TaskLocation;
 import io.realm.Realm;
 import io.realm.exceptions.RealmException;
 import pervasivecomputing.locationreminder.R;
@@ -64,11 +66,19 @@ public class TaskAdapter extends ArrayAdapter<Task> {
         ImageButton deleteBtn = (ImageButton) v.findViewById(R.id.tasks_delete);
         final Task task = taskList.get(position);
         taskName.setText(task.getTaskDetail());
-        if (task.getLatitude() != 0 && task.getLongitude() != 0){
-            float[] distResults =  new float[2];
-            Location.distanceBetween(latitude, longitude, task.getLatitude(), task.getLongitude(), distResults);
+        if (task.getLocations().size() > 0){
+            float distance = 10000000.f;
+            List<TaskLocation> locs = task.getLocations();
+            for (int i = 0;i<locs.size(); i++){
+                float[] distResults =  new float[2];
+                Location.distanceBetween(latitude, longitude, locs.get(i).getLatitude(), locs.get(i).getLongitude(), distResults);
+                if (distResults[0] < distance){
+                    distance = distResults[0];
+                }
+            }
+
             taskDistance.setVisibility(View.VISIBLE);
-            taskDistance.setText(distResults[0] + "m");
+            taskDistance.setText(distance + "m");
         }
         else{
             taskDistance.setVisibility(View.GONE);

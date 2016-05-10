@@ -26,6 +26,7 @@ import java.util.GregorianCalendar;
 import java.util.List;
 
 import Models.Task;
+import Models.TaskLocation;
 import adapter.TaskAdapter;
 import io.realm.Realm;
 import io.realm.RealmConfiguration;
@@ -92,15 +93,19 @@ public class TaskActivity extends Activity implements TaskAdapter.deleteListener
             Calendar calendar2 = GregorianCalendar.getInstance();
             calendar2.setTimeInMillis(t.getTimestamp());
             Log.d("julian", "task time" + calendar2.get(Calendar.HOUR_OF_DAY) + calendar2.get(Calendar.MINUTE));
-            if (t.getLongitude() != 0 && t.getLatitude()!= 0){
-                float[] dist = new float[2];
-                Location.distanceBetween(t.getLatitude(), t.getLongitude(), curLatitude, curLongitude, dist);
-                if (t.getRadius() >= dist[0]){
-                    Vibrator v = (Vibrator) this.getSystemService(Context.VIBRATOR_SERVICE);
-                    v.vibrate(500);
-                    Toast.makeText(TaskActivity.this, "The task " + t.getTaskDetail() + " is due", Toast.LENGTH_SHORT).show();
-                    return;
+            if (t.getLocations().size() > 0){
+                List<TaskLocation> locs = t.getLocations();
+                for (int i = 0; i < locs.size(); i++ ){
+                    float[] dist = new float[2];
+                    Location.distanceBetween(locs.get(i).getLatitude(), locs.get(i).getLongitude(), curLatitude, curLongitude, dist);
+                    if (t.getRadius() >= dist[0]){
+                        Vibrator v = (Vibrator) this.getSystemService(Context.VIBRATOR_SERVICE);
+                        v.vibrate(500);
+                        Toast.makeText(TaskActivity.this, "The task " + t.getTaskDetail() + " is due", Toast.LENGTH_SHORT).show();
+                        return;
+                    }
                 }
+
             }
             if (t.getTimestamp() != 0){
                 Log.d("julian", "time not null");
